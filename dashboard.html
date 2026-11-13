@@ -10,6 +10,7 @@
 <script src="assets/config.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js" defer></script>
 <script src="assets/auth.js" defer></script>
+<script src="assets/dashboard.js" defer></script>
 </head>
 <body>
 <header><div class="wrap">
@@ -23,12 +24,16 @@
 </div></header>
 
 <main><section><div class="wrap" id="dash">
-  <h1>मेरा डैशबोर्ड</h1>
-  <div class="card">
-    <p><strong>Logged in:</strong> <span id="user-email">...</span></p>
-    <p id="profile-status">Jaanch ho rahi hai…</p>
-        <p><a class="btn" href="profile.html" style="display:inline-block;text-decoration:none">Profile bharein ya badlein</a></p>
-  </div>
+  <h1 id="welcome">मेरा डैशबोर्ड</h1>
+  <p><strong>Logged in:</strong> <span id="user-email">...</span></p>
+  <p id="profile-status"></p>
+
+  <h2>मेरी प्रोफ़ाइल</h2>
+  <div class="card" id="profile-card"><p>लोड हो रहा है…</p></div>
+  <p><a class="btn" href="profile.html" style="display:inline-block;text-decoration:none;margin-top:.8rem">Profile bharein ya badlein</a></p>
+
+  <h2>मेरी इंटर्नशिप</h2>
+  <div class="grid" id="my-internships"><p>लोड हो रहा है…</p></div>
 </div></section></main>
 
 <footer><div class="wrap">
