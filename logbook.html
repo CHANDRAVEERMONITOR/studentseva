@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>मेरा लॉगबुक | StudentSeva.in</title>
+<meta name="theme-color" content="#0f2a43">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+.f label{display:block;font-weight:700;margin:.8rem 0 .3rem}
+.f input,.f select,.f textarea{width:100%;padding:.8rem;border:2px solid var(--line);border-radius:8px;font:inherit;background:#fff}
+.f .btn{margin-top:1rem}
+</style>
+<script src="assets/config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js" defer></script>
+<script src="assets/auth.js" defer></script>
+<script src="assets/logbook.js" defer></script>
+</head>
+<body>
+<header><div class="wrap">
+  <a class="logo" href="./">Student<span>Seva</span></a>
+  <nav aria-label="Main">
+    <a href="dashboard.html">Dashboard</a>
+    <a href="internships.html">Internships</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</div></header>
+
+<main><section><div class="wrap">
+  <h1>मेरा लॉगबुक</h1>
+  <p>हर दिन आपने जो काम किया, वह यहाँ लिखें। मेंटर के मंज़ूर करने पर ही वह दिन उपस्थिति में गिना जाएगा।</p>
+
+  <p id="no-cert" class="card" hidden>आपकी कोई चालू इंटर्नशिप नहीं है। भुगतान के बाद यहाँ लॉगबुक खुलेगा।</p>
+
+  <form id="log-form" class="card f">
+    <label for="cert-select">इंटर्नशिप</label>
+    <select id="cert-select"></select>
+    <label for="log_date">तारीख़</label>
+    <input id="log_date" type="date" required>
+    <label for="activity">आज आपने क्या काम किया</label>
+    <textarea id="activity" rows="4" minlength="10" maxlength="1000" required
+      placeholder="जैसे: कंपनी के लिए Instagram पोस्ट का डिज़ाइन बनाया और कैप्शन लिखा"></textarea>
+    <button class="btn" type="submit">Log jama karein</button>
+    <div id="log-msg" class="result" role="status" hidden></div>
+  </form>
+
+  <p id="attendance"></p>
+  <h2>मेरे लॉग</h2>
+  <div class="grid" id="log-list"><p>लोड हो रहा है…</p></div>
+</div></section></main>
+
+<footer><div class="wrap">
+  <p><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy-policy.html">Privacy Policy</a><a href="terms.html">Terms</a><a href="refund-policy.html">Refund Policy</a><a href="disclaimer.html">Disclaimer</a></p>
+</div></footer>
+</body>
+</html>
