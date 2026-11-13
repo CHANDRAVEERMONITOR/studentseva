@@ -80,7 +80,7 @@
       document.getElementById('profile-status').textContent = error
         ? 'Profile ki sthiti abhi nahi mil payi.'
         : s ? 'Profile bhari hui hai: ' + s.full_name
-            : 'Aapki profile abhi nahi bhari gayi hai. Yeh agle step me aayega.';
+            : 'निचे क्लिक करके फॉर्म भरक profile पूरा करें .';
     });
     document.getElementById('logout').addEventListener('click', async () => {
       await sb.auth.signOut();
