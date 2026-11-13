@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Admin | StudentSeva.in</title>
+<meta name="theme-color" content="#0f2a43">
+<link rel="stylesheet" href="../assets/style.css">
+<script src="../assets/config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js" defer></script>
+<script src="../assets/auth.js" defer></script>
+<script src="../assets/admin.js" defer></script>
+</head>
+<body>
+<header><div class="wrap">
+  <a class="logo" href="../">Student<span>Seva</span> Admin</a>
+  <nav aria-label="Admin"><button class="btn" id="logout" type="button">Logout</button></nav>
+</div></header>
+
+<main><section><div class="wrap">
+  <p id="gate" class="card" hidden>Aapke paas admin access nahi hai.</p>
+  <div id="panel" hidden>
+    <h1>Jaanch ke liye baaki logs</h1>
+    <p>Kul baaki: <strong id="count">0</strong></p>
+    <div class="grid" id="pending"><p>Load ho raha hai…</p></div>
+  </div>
+</div></section></main>
+</body>
+</html>
