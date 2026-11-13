@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>मेरी प्रोफ़ाइल | StudentSeva.in</title>
+<meta name="theme-color" content="#0f2a43">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+.f label{display:block;font-weight:700;margin:.8rem 0 .3rem}
+.f input,.f select,.f textarea{width:100%;padding:.8rem;border:2px solid var(--line);border-radius:8px;font:inherit;background:#fff}
+.f .btn{margin-top:1.2rem}
+.chk{display:flex;gap:.5rem;align-items:flex-start;margin-top:1rem}
+.chk input{width:auto;margin-top:.35rem}
+</style>
+<script src="assets/config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js" defer></script>
+<script src="assets/auth.js" defer></script>
+<script src="assets/profile.js" defer></script>
+</head>
+<body>
+<header><div class="wrap">
+  <a class="logo" href="./">Student<span>Seva</span></a>
+  <nav aria-label="Main">
+    <a href="internships.html">Internships</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</div></header>
+
+<main><section><div class="wrap">
+  <h1>मेरी प्रोफ़ाइल</h1>
+  <p>सारी जानकारी वैसी ही भरें जैसी आपके कॉलेज के रिकॉर्ड में है। यही जानकारी ऑफ़र लेटर और सर्टिफिकेट पर आएगी।</p>
+  <form id="profile-form" class="card f">
+    <div class="grid">
+      <div><label for="full_name">पूरा नाम</label>
+        <input id="full_name" name="full_name" type="text" minlength="3" maxlength="120" required></div>
+      <div><label for="gender">लिंग</label>
+        <select id="gender" name="gender" required>
+          <option value="">चुनें</option><option>Male</option><option>Female</option><option>Other</option>
+        </select></div>
+      <div><label for="phone">फ़ोन नंबर (10 अंक)</label>
+        <input id="phone" name="phone" type="tel" inputmode="numeric" pattern="[6-9][0-9]{9}" maxlength="10" required></div>
+      <div><label for="dob">जन्मतिथि</label>
+        <input id="dob" name="dob" type="date" min="1950-01-02" required></div>
+      <div><label for="university_name">विश्वविद्यालय</label>
+        <input id="university_name" name="university_name" type="text" value="Lalit Narayan Mithila University (LNMU), Darbhanga" required></div>
+      <div><label for="college_name">कॉलेज का नाम</label>
+        <input id="college_name" name="college_name" type="text" required></div>
+      <div><label for="course_branch">कोर्स</label>
+        <select id="course_branch" name="course_branch" required>
+          <option value="">चुनें</option><option>B.A.</option><option>B.Sc.</option><option>B.Com.</option><option>Other</option>
+        </select></div>
+      <div><label for="stream">स्ट्रीम</label>
+        <select id="stream" name="stream" required>
+          <option value="">चुनें</option><option>Arts</option><option>Science</option><option>Commerce</option><option>Other</option>
+        </select></div>
+      <div><label for="major">मेजर विषय (जैसे History)</label>
+        <input id="major" name="major" type="text" required></div>
+      <div><label for="session">सेशन (जैसे 2023-2027)</label>
+        <input id="session" name="session" type="text" pattern="[0-9]{4}-[0-9]{4}" placeholder="2023-2027" required></div>
+      <div><label for="semester">सेमेस्टर</label>
+        <select id="semester" name="semester" required>
+          <option value="">चुनें</option>
+          <option>1</option><option>2</option><option>3</option><option>4</option>
+          <option>5</option><option>6</option><option>7</option><option>8</option>
+        </select></div>
+      <div><label for="roll_no">यूनिवर्सिटी रोल नंबर</label>
+        <input id="roll_no" name="roll_no" type="text" required></div>
+      <div><label for="reg_no">रजिस्ट्रेशन नंबर (अगर हो)</label>
+        <input id="reg_no" name="reg_no" type="text"></div>
+      <div><label for="state">राज्य</label>
+        <input id="state" name="state" type="text" value="Bihar" required></div>
+      <div><label for="district">ज़िला</label>
+        <input id="district" name="district" type="text" required></div>
+    </div>
+    <label for="address">पूरा पता</label>
+    <textarea id="address" name="address" rows="3" minlength="5" maxlength="300" required></textarea>
+
+    <label class="chk"><input type="checkbox" required>
+      <span>मैंने <a href="privacy-policy.html" target="_blank">प्राइवेसी पॉलिसी</a> और <a href="terms.html" target="_blank">नियम और शर्तें</a> पढ़ ली हैं और मैं सहमत हूँ।</span></label>
+
+    <button class="btn" type="submit">Profile save karein</button>
+    <div id="profile-msg" class="result" role="status" hidden></div>
+  </form>
+</div></section></main>
+
+<footer><div class="wrap">
+  <p><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy-policy.html">Privacy Policy</a><a href="terms.html">Terms</a><a href="refund-policy.html">Refund Policy</a><a href="disclaimer.html">Disclaimer</a></p>
+</div></footer>
+</body>
+</html>
