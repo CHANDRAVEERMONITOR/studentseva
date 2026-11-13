@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>लॉगिन / रजिस्टर | StudentSeva.in</title>
+<meta name="theme-color" content="#0f2a43">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+.auth{max-width:440px;margin:0 auto}
+.auth label{display:block;font-weight:700;margin:.8rem 0 .3rem}
+.auth input{width:100%;padding:.8rem;border:2px solid var(--line);border-radius:8px;font:inherit}
+.auth .btn{width:100%;margin-top:1rem}
+.link{background:none;border:0;color:var(--brand);font:inherit;text-decoration:underline;cursor:pointer;padding:0}
+</style>
+<script src="assets/config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js" defer></script>
+<script src="assets/auth.js" defer></script>
+</head>
+<body>
+<header><div class="wrap">
+  <a class="logo" href="./">Student<span>Seva</span></a>
+  <nav aria-label="Main">
+    <a href="internships.html">Internships</a>
+    <a href="./#verify">Verify</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</div></header>
+
+<main><section><div class="wrap"><div class="card auth">
+  <form id="login-form">
+    <h2>लॉगिन</h2>
+    <label for="l-email">Email</label>
+    <input id="l-email" name="email" type="email" autocomplete="email" required>
+    <label for="l-pw">Password</label>
+    <input id="l-pw" name="password" type="password" autocomplete="current-password" required>
+    <button class="btn" type="submit">Login karein</button>
+    <div id="login-msg" class="result" role="status" hidden></div>
+    <p>Naya account banana hai? <button class="link" type="button" id="show-signup">Register karein</button></p>
+  </form>
+
+  <form id="signup-form" hidden>
+    <h2>नया अकाउंट</h2>
+    <label for="s-email">Email</label>
+    <input id="s-email" name="email" type="email" autocomplete="email" required>
+    <label for="s-pw">Password (kam se kam 8 akshar)</label>
+    <input id="s-pw" name="password" type="password" autocomplete="new-password" minlength="8" required>
+    <label for="s-pw2">Password dobara likhein</label>
+    <input id="s-pw2" name="password2" type="password" autocomplete="new-password" minlength="8" required>
+    <button class="btn" type="submit">Account banayein</button>
+    <div id="signup-msg" class="result" role="status" hidden></div>
+    <p>Pehle se account hai? <button class="link" type="button" id="show-login">Login karein</button></p>
+  </form>
+</div></div></section></main>
+
+<footer><div class="wrap">
+  <p><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy-policy.html">Privacy Policy</a><a href="terms.html">Terms</a><a href="refund-policy.html">Refund Policy</a><a href="disclaimer.html">Disclaimer</a></p>
+</div></footer>
+</body>
+</html>
