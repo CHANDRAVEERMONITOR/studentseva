@@ -6,6 +6,7 @@
   const gate = document.getElementById('gate');
   const panel = document.getElementById('panel');
   const count = document.getElementById('count');
+  const LOGIN_URL = 'login.html';
 
   const fmt = d => {
     if (!d) return '-';
@@ -90,8 +91,7 @@
     const ok = el('button', 'Manzoor karein', 'btn');
     const no = el('button', 'Asweekar karein', 'btn');
     no.style.background = '#b42318';
-    ok.type = 'button';
-    no.type = 'button';
+    ok.type = no.type = 'button';
 
     ok.addEventListener('click', () => review(card, r.id, 'approved'));
     no.addEventListener('click', () => review(card, r.id, 'rejected'));
@@ -123,7 +123,7 @@
   async function init() {
     const { data } = await sb.auth.getSession();
     if (!data.session) {
-      location.href = '../login.html';
+      location.href = LOGIN_URL;
       return;
     }
 
@@ -147,7 +147,7 @@
   if (logoutBtn) {
     logoutBtn.addEventListener('click', async () => {
       await sb.auth.signOut();
-      location.href = '../login.html';
+      location.href = LOGIN_URL;
     });
   }
 
