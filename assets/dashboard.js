@@ -10,6 +10,7 @@
     n.textContent = text;
     return n;
   };
+
   const row = (k, v) => {
     const p = document.createElement('p');
     const b = document.createElement('strong');
@@ -17,16 +18,39 @@
     p.append(b, document.createTextNode(v == null || v === '' ? '-' : v));
     return p;
   };
-  const fmt = d => d
-    ? new Date(d).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' })
-    : '-';
 
-  const PAY = { pending: 'Bhugtan baaki', paid: 'Bhugtan ho gaya', failed: 'Bhugtan fail hua', refunded: 'Refund ho gaya' };
-  const WORK = { applied: 'Dakhila hua', in_progress: 'Kaam chal raha hai', submitted: 'Kaam jama hua',
-                 approved: 'Kaam manzoor', rejected: 'Kaam asweekar' };
+  const fmt = d => {
+    if (!d) return '-';
+    const safeDate = /^\d{4}-\d{2}-\d{2}$/.test(d) ? `${d}T00:00:00+05:30` : d;
+    return new Date(safeDate).toLocaleDateString('en-IN', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+      timeZone: 'Asia/Kolkata'
+    });
+  };
+
+  const PAY = {
+    pending: 'Bhugtan baaki',
+    paid: 'Bhugtan ho gaya',
+    failed: 'Bhugtan fail hua',
+    refunded: 'Refund ho gaya'
+  };
+
+  const WORK = {
+    applied: 'Dakhila hua',
+    in_progress: 'Kaam chal raha hai',
+    submitted: 'Kaam jama hua',
+    approved: 'Kaam manzoor',
+    rejected: 'Kaam asweekar'
+  };
 
   sb.auth.getSession().then(async ({ data }) => {
-    if (!data.session) return;
+    if (!data.session) {
+      location.href = 'login.html';
+      return;
+    }
+
     const uid = data.session.user.id;
 
     const [s, c] = await Promise.all([
@@ -44,25 +68,35 @@
     } else {
       const p = s.data;
       const w = document.getElementById('welcome');
-      if (w) w.textContent = 'Namaste, ' + p.full_name;
+      if (w) w.textContent = 'Namaste, ' + (p.full_name || 'Student');
+
+      const courseText = [
+        p.course_branch,
+        p.major ? `(${p.major})` : '',
+        p.semester ? `Semester ${p.semester}` : ''
+      ].filter(Boolean).join(' ') || '-';
+
+      const addressText = [p.address, p.district, p.state].filter(Boolean).join(', ') || '-';
+
       box.replaceChildren(
-        row('Course', `${p.course_branch} (${p.major}), Semester ${p.semester}`),
+        row('Course', courseText),
         row('College', p.college_name),
         row('University', p.university_name),
         row('Session', p.session),
         row('Roll No', p.roll_no),
         row('Registration No', p.reg_no),
         row('Phone', p.phone),
-        row('Email', p.email),
+        row('Email', p.email || data.session.user.email),
         row('Janm tithi', fmt(p.dob)),
-        row('Pata', `${p.address}, ${p.district}, ${p.state}`)
+        row('Pata', addressText)
       );
     }
 
     // ---- Meri internships ----
+    const certs = Array.isArray(c.data) ? c.data : [];
     if (c.error) {
       list.replaceChildren(el('p', 'Internships abhi load nahi ho payi.'));
-    } else if (!c.data.length) {
+    } else if (!certs.length) {
       const p = el('p', 'Aapne abhi koi internship nahi li hai. ');
       const a = document.createElement('a');
       a.href = 'internships.html';
@@ -70,7 +104,7 @@
       p.append(a);
       list.replaceChildren(p);
     } else {
-      list.replaceChildren(...c.data.map(r => {
+      list.replaceChildren(...certs.map(r => {
         const card = document.createElement('article');
         card.className = 'card';
         const i = r.internships || {};
