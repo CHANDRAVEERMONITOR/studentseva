@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Login — StudentSeva.in</title>
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+  <main class="container" style="max-width:420px;margin:2.5rem auto;">
+    <article class="card">
+      <h1>Admin Login</h1>
+      <p>Sirf authorized admin ke liye.</p>
+
+      <form id="admin-login-form">
+        <label for="admin-email">Admin Email</label>
+        <input id="admin-email" name="email" type="email" required autocomplete="username" />
+
+        <label for="admin-password" style="margin-top:.75rem;display:block;">Password</label>
+        <input id="admin-password" name="password" type="password" required autocomplete="current-password" />
+
+        <button type="submit" class="btn" style="margin-top:1rem;width:100%;">Admin Panel Kholein</button>
+        <p id="admin-login-msg" class="result" hidden></p>
+      </form>
+    </article>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../assets/config.js"></script>
+  <script src="../assets/auth.js"></script>
+  <script>
+    (() => {
+      const sb = window.sb;
+      const form = document.getElementById('admin-login-form');
+      const msg = document.getElementById('admin-login-msg');
+      if (!sb || !form) return;
+
+      const say = (text, ok) => {
+        msg.textContent = text || '';
+        msg.className = 'result ' + (ok ? 'ok' : 'bad');
+        msg.hidden = !text;
+      };
+
+      async function checkAdminAndGo(userId) {
+        const { data, error } = await sb
+          .from('admins')
+          .select('user_id')
+          .eq('user_id', userId)
+          .maybeSingle();
+
+        if (error) {
+          say('Admin verification me error aaya. Dobara try karein.', false);
+          return false;
+        }
+        if (!data) {
+          await sb.auth.signOut();
+          say('Is account ko admin access nahi mila hai.', false);
+          return false;
+        }
+        location.href = 'index.html';
+        return true;
+      }
+
+      sb.auth.getSession().then(({ data }) => {
+        if (data.session?.user) {
+          checkAdminAndGo(data.session.user.id);
+        }
+      });
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const btn = form.querySelector('button[type=submit]');
+        btn.disabled = true;
+        say('', true);
+
+        const email = form.email.value.trim();
+        const password = form.password.value;
+
+        const { data, error } = await sb.auth.signInWithPassword({ email, password });
+        if (error) {
+          btn.disabled = false;
+          say('Email ya password galat hai.', false);
+          return;
+        }
+
+        const ok = await checkAdminAndGo(data.user.id);
+        if (!ok) btn.disabled = false;
+      });
+    })();
+  </script>
+</body>
+</html>
